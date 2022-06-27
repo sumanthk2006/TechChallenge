@@ -23,7 +23,7 @@ struct TransactionView: View {
                 Spacer()
                 Image(systemName: transaction.isPinned ? "pin.fill" : "pin.slash.fill")
             }
-            if !transaction.isPinned {
+            if transaction.isPinned {
                 HStack {
                     transaction.image
                         .resizable()

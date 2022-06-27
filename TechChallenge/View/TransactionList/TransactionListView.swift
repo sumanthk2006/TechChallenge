@@ -8,21 +8,26 @@
 import SwiftUI
 
 struct TransactionListView: View {
-    @State var selectedCategory = TransactionModel.Category.all
+    @State private var selectedCategory = TransactionModel.Category.all
     
-    @EnvironmentObject var transactions: TransactionList
+    @EnvironmentObject private var transactions: TransactionList
     
     var body: some View {
         
         VStack {
             CategoriesListView(selectedCategory: $selectedCategory)
             List {
-                ForEach(getTransaction(for: selectedCategory)) { transaction in
+                ForEach(transactions.list.transactionsFor(selectedCategory: selectedCategory)) { transaction in
                     TransactionView(transaction: transaction)
                 }
             }
-            .animation(.default)
+            .animation(.default, value: getTransaction(for: selectedCategory))
             .listStyle(PlainListStyle())
+            
+            TotalAmountView(selectedCategory: $selectedCategory)
+                .frame(maxWidth:.infinity)
+                .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
+            
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle(NSLocalizedString("Transactions", comment: ""))
         }
@@ -38,6 +43,7 @@ struct TransactionListView: View {
 struct TransactionListView_Previews: PreviewProvider {
     static var previews: some View {
         TransactionListView()
+            .environmentObject(TransactionList())
     }
 }
 #endif

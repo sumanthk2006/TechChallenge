@@ -42,7 +42,7 @@ struct TransactionModel: Equatable {
     let accountName: String
     let provider: Provider?
     
-    var isPinned: Bool = false
+    var isPinned: Bool = true
     
 }
 

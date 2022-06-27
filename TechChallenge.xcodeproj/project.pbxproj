@@ -28,6 +28,7 @@
 		97A5C0932869E9C4007670CC /* TransactionList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A5C0922869E9C4007670CC /* TransactionList.swift */; };
 		97A5C0962869EEE6007670CC /* CategoriesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A5C0952869EEE6007670CC /* CategoriesListView.swift */; };
 		97A5C0982869F5A2007670CC /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A5C0972869F5A2007670CC /* CategoryView.swift */; };
+		97A5C09B286A031D007670CC /* TotalAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A5C09A286A031D007670CC /* TotalAmountView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		97A5C0922869E9C4007670CC /* TransactionList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionList.swift; sourceTree = "<group>"; };
 		97A5C0952869EEE6007670CC /* CategoriesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesListView.swift; sourceTree = "<group>"; };
 		97A5C0972869F5A2007670CC /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
+		97A5C09A286A031D007670CC /* TotalAmountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalAmountView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,8 @@
 			children = (
 				3CE226B826B0548C00B3D085 /* TransactionView.swift */,
 				3CE226B426B0523C00B3D085 /* TransactionListView.swift */,
+				97A5C099286A0310007670CC /* TotalAmount */,
+				97A5C0942869EE98007670CC /* CategoriesList */,
 			);
 			path = TransactionList;
 			sourceTree = "<group>";
@@ -150,7 +154,6 @@
 				97A5C0922869E9C4007670CC /* TransactionList.swift */,
 				3CE226CB26B2E44E00B3D085 /* Insights */,
 				3CE226C826B2E42800B3D085 /* TransactionList */,
-				97A5C0942869EE98007670CC /* CategoriesList */,
 				3CE226CC26B2E47300B3D085 /* Shared */,
 			);
 			path = View;
@@ -203,6 +206,14 @@
 				97A5C0972869F5A2007670CC /* CategoryView.swift */,
 			);
 			path = CategoriesList;
+			sourceTree = "<group>";
+		};
+		97A5C099286A0310007670CC /* TotalAmount */ = {
+			isa = PBXGroup;
+			children = (
+				97A5C09A286A031D007670CC /* TotalAmountView.swift */,
+			);
+			path = TotalAmount;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -319,6 +330,7 @@
 				97A5C0932869E9C4007670CC /* TransactionList.swift in Sources */,
 				3CE226C126B062BA00B3D085 /* Double.swift in Sources */,
 				3CE226AF26B03CBA00B3D085 /* TransactionModel.swift in Sources */,
+				97A5C09B286A031D007670CC /* TotalAmountView.swift in Sources */,
 				3CE01C6426B2EBDE0091B7BA /* Color.swift in Sources */,
 				3CE226BB26B0573C00B3D085 /* Date.swift in Sources */,
 				3CE226C726B2E41E00B3D085 /* InsightsView.swift in Sources */,
