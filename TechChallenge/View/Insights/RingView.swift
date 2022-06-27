@@ -10,24 +10,35 @@ import SwiftUI
 fileprivate typealias Category = TransactionModel.Category
 
 struct RingView: View {
-    let transactions: [TransactionModel]
+    @EnvironmentObject private var transactions: TransactionList
+    
+    private let categories = Category.allCases.filter { $0 != .all}
     
     private func ratio(for categoryIndex: Int) -> Double {
-        // TODO: calculate ratio for each category according to cummulative expense
-        
-        // Returning sample value
-        0.2
+        let category = categories[categoryIndex]
+        return getCategoriesRatio()[category] ?? 0.0
+    }
+    
+    private func getCategoriesRatio() -> [Category: Double] {
+        var ratio: [Category: Double] = [:]
+        for category in categories {
+            ratio[category] = transactions.list.ratioFor(selectedCategory: category, includeOnlyPinned: true)
+        }
+        return ratio
     }
     
     private func offset(for categoryIndex: Int) -> Double {
-        // TODO: calculate offset for each category according to cummulative expense
-        
-        // Returning sample value
-        Double(categoryIndex) * 0.2
+        guard categoryIndex != 0 else {
+            return 0.0
+        }
+        // Iterate through the categories and sum up the ratio of each category
+        return (0...categoryIndex-1).reduce(0.0) { partialResult, eachIndex in
+            partialResult + ratio(for: eachIndex)
+        }
     }
 
     private func gradient(for categoryIndex: Int) -> AngularGradient {
-        let color = Category[categoryIndex]?.color ?? .black
+        let color = categories[categoryIndex].color
         return AngularGradient(
             gradient: Gradient(colors: [color.unsaturated, color]),
             center: .center,
@@ -43,12 +54,16 @@ struct RingView: View {
     }
     
     private func percentageText(for categoryIndex: Int) -> String {
-        "\((ratio(for: categoryIndex) * 100).formatted(hasDecimals: false))%"
+        let percentage = (ratio(for: categoryIndex) * 100)
+        if percentage > 0 {
+            return "\(percentage.formatted(hasDecimals: false))%"
+        }
+        return ""
     }
     
     var body: some View {
         ZStack {
-            ForEach(Category.allCases.indices) { categoryIndex in
+            ForEach(categories.indices) { categoryIndex in
                 PartialCircleShape(
                     offset: offset(for: categoryIndex),
                     ratio: ratio(for: categoryIndex)
@@ -129,8 +144,9 @@ struct RingView_Previews: PreviewProvider {
             sampleRing
                 .scaledToFit()
             
-            RingView(transactions: ModelData.sampleTransactions)
+            RingView()
                 .scaledToFit()
+                .environmentObject(TransactionList())
         }
         .padding()
         .previewLayout(.sizeThatFits)

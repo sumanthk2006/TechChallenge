@@ -8,21 +8,21 @@
 import SwiftUI
 
 struct InsightsView: View {
-    let transactions: [TransactionModel] = ModelData.sampleTransactions
+    @EnvironmentObject private var transactions: TransactionList
+    let categories = TransactionModel.Category.allCases.filter {$0 != .all}
     
     var body: some View {
         List {
-            RingView(transactions: transactions)
+            RingView()
                 .scaledToFit()
             
-            ForEach(TransactionModel.Category.allCases) { category in
+            ForEach(categories) { category in
                 HStack {
                     Text(category.rawValue)
                         .font(.headline)
                         .foregroundColor(category.color)
                     Spacer()
-                    // TODO: calculate cummulative expense for each category
-                    Text("$0.0")
+                    Text(transactions.list.transactionsTotalFor(selectedCategory: category))
                         .bold()
                         .secondary()
                 }
