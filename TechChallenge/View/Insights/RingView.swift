@@ -63,7 +63,7 @@ struct RingView: View {
     
     var body: some View {
         ZStack {
-            ForEach(categories.indices) { categoryIndex in
+            ForEach(categories.indices, id: \.self) { categoryIndex in
                 PartialCircleShape(
                     offset: offset(for: categoryIndex),
                     ratio: ratio(for: categoryIndex)

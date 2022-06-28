@@ -22,16 +22,19 @@ struct TotalAmountView: View {
                 
                 HStack {
                     Text(NSLocalizedString("Total spent:", comment: ""))
+                        .fontWeight(.regular)
+                        .secondary()
                     Spacer()
                     Text(transactions.list.transactionsTotalFor(selectedCategory: selectedCategory))
-                        .primary()
+                        .fontWeight(.bold)
+                        .secondary()
                         .matchedGeometryEffect(id: "totalAmount", in: totalAmountNameSpace)
                 }
             }
             
         }
         .padding()
-        .overlay(RoundedRectangle(cornerRadius: 10, style: .circular).stroke(Color.accentColor, lineWidth: 2))
+        .overlay(RoundedRectangle(cornerRadius: 8.0, style: .circular).stroke(Color.accentColor, lineWidth: 2))
     }
 }
 

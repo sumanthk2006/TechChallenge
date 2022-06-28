@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct TransactionListView: View {
-    @State private var selectedCategory = TransactionModel.Category.all
+    @State private var selectedCategory: TransactionModel.Category
     
     @EnvironmentObject private var transactions: TransactionList
     
+    init(selectedCategory: TransactionModel.Category = .all) {
+        self.selectedCategory = selectedCategory
+    }
+    
     var body: some View {
-        
         VStack {
             CategoriesListView(selectedCategory: $selectedCategory)
             List {
@@ -21,7 +24,7 @@ struct TransactionListView: View {
                     TransactionView(transaction: transaction)
                 }
             }
-            .animation(.default, value: getTransaction(for: selectedCategory))
+            .animation(.default)
             .listStyle(PlainListStyle())
             
             TotalAmountView(selectedCategory: $selectedCategory)
@@ -31,11 +34,6 @@ struct TransactionListView: View {
             .navigationBarTitleDisplayMode(.inline)
             .navigationTitle(NSLocalizedString("Transactions", comment: ""))
         }
-    }
-    
-    
-    func getTransaction(for category: TransactionModel.Category) -> [TransactionModel] {
-        transactions.list.filter { $0.category == category || category == .all}
     }
 }
 

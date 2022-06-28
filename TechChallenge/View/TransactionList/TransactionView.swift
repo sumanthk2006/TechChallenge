@@ -24,32 +24,7 @@ struct TransactionView: View {
                 Image(systemName: transaction.isPinned ? "pin.fill" : "pin.slash.fill")
             }
             if transaction.isPinned {
-                HStack {
-                    transaction.image
-                        .resizable()
-                        .frame(
-                            width: 60.0,
-                            height: 60.0,
-                            alignment: .top
-                        )
-                    
-                    VStack(alignment: .leading) {
-                        Text(transaction.name)
-                            .secondary()
-                        Text(transaction.accountName)
-                            .tertiary()
-                    }
-                    
-                    Spacer()
-                    
-                    VStack(alignment: .trailing) {
-                        Text("$\(transaction.amount.formatted())")
-                            .bold()
-                            .secondary()
-                        Text(transaction.date.formatted)
-                            .tertiary()
-                    }
-                }
+                pinnedTransactionView(for: transaction)
             }
         }
         .padding(8.0)
@@ -60,6 +35,36 @@ struct TransactionView: View {
                 transactionData.list[index].isPinned.toggle()
             }
             transaction.isPinned.toggle()
+        }
+    }
+    
+    
+    func pinnedTransactionView(for transaction: TransactionModel) -> some View {
+        HStack {
+            transaction.image
+                .resizable()
+                .frame(
+                    width: 60.0,
+                    height: 60.0,
+                    alignment: .top
+                )
+            
+            VStack(alignment: .leading) {
+                Text(transaction.name)
+                    .secondary()
+                Text(transaction.accountName)
+                    .tertiary()
+            }
+            
+            Spacer()
+            
+            VStack(alignment: .trailing) {
+                Text("$\(transaction.amount.formatted())")
+                    .bold()
+                    .secondary()
+                Text(transaction.date.formatted)
+                    .tertiary()
+            }
         }
     }
 }

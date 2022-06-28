@@ -19,15 +19,20 @@ struct TechChallengeApp: App {
                 }
                 .tabItem {
                     Label("Transactions", systemImage: "list.bullet")
-                }.environmentObject(transactionList)
+                }
+                .environmentObject(transactionList)
+                .navigationViewStyle(.stack)
                 
                 NavigationView {
                     InsightsView()
                 }
                 .tabItem {
                     Label("Insights", systemImage: "chart.pie.fill")
-                }.environmentObject(transactionList)
+                }
+                .environmentObject(transactionList)
+                .navigationViewStyle(.stack)
             }
+            .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .never))
         }
     }
 }
